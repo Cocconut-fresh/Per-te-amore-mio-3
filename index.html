@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Nostro Angolo Speciale</title>
+<p id="compliment" style="font-weight: bold; color: #d53f8c; margin-top: 10px;"></p>
+<p id="quote" style="font-style: italic; font-size: 0.9rem; color: #718096; margin-top: 5px;"></p>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="greeting">Ciao Piccola ❤️</h1>
+            <p class="subtitle">Ogni tuo pensiero per me è un tesoro.</p>
+        </header>
+
+        <main>
+            <div class="diary-section">
+                <label for="diary">Com'è andata la tua giornata?</label>
+                <textarea id="diary-input" placeholder="Scrivimi tutto quello che vuoi..."></textarea>
+                <button onclick="saveNote()">Custodisci questo ricordo</button>
+            </div>
+            
+            <div id="saved-messages">
+                </div>
+        </main>
+
+        <footer>
+            <p>Sempre qui per te. Ti amo. ✨</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
