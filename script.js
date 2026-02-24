@@ -82,7 +82,7 @@ function saveNote() {
 function createFallingElements() {
     const container = document.body;
     const elements = ['⚜️', '⭐', '✨', '⚜️']; // Gigli bordeaux e stelle
-    const numberOfElements = 60; // Quanti ne vuoi sullo schermo
+    const numberOfElements = infinite; // Quanti ne vuoi sullo schermo
 
     for (let i = 0; i < numberOfElements; i++) {
         const el = document.createElement('div');
@@ -113,3 +113,4 @@ function createFallingElements() {
 // Avvia la pioggia all'apertura
 
 createFallingElements();
+
