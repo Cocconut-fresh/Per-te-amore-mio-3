@@ -62,11 +62,10 @@ button:hover { transform: scale(1.05); background-color: #b83280; }
     animation: fall linear forwards;
 }
 
-@keyframes fall {
-    infinite,
-    opacity,
+@keyframes fall infinite opacity {
     to {
         transform: translateY(105vh) rotate(360deg);
     }
 
 }
+
