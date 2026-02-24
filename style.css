@@ -9,13 +9,13 @@ body {
 }
 
 .container {
-    background: white;
-    padding: 7rem;
+    background: bordeaux;
+    padding: 1.8rem;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     max-width: 500px;
     width: 90%;
-    margin-top: 50px;
+    margin-top: 80px;
     text-align: center;
 }
 
@@ -68,5 +68,3 @@ button:hover { transform: scale(1.05); background-color: #b83280; }
     }
 
 }
-
-
