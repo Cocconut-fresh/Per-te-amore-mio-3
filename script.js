@@ -82,7 +82,7 @@ function saveNote() {
 function createFallingElements() {
     const container = document.body;
     const elements = ['⚜️', '⭐', '✨', '⚜️']; // Gigli bordeaux e stelle
-    const numberOfElements = 30; // Quanti ne vuoi sullo schermo
+    const numberOfElements = 60; // Quanti ne vuoi sullo schermo
 
     for (let i = 0; i < numberOfElements; i++) {
         const el = document.createElement('div');
@@ -98,7 +98,7 @@ function createFallingElements() {
         el.style.fontSize = (Math.random() * 20 + 10) + 'px';
         
         // Durata della caduta casuale (tra 5 e 10 secondi)
-        el.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        el.style.animationDuration = (Math.random() * 10 + 10) + 's';
         
         // Ritardo iniziale casuale per non farli partire tutti insieme
         el.style.animationDelay = Math.random() * 5 + 's';
@@ -111,4 +111,5 @@ function createFallingElements() {
 }
 
 // Avvia la pioggia all'apertura
+
 createFallingElements();
