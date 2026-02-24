@@ -4,14 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il Nostro Angolo Speciale</title>
-<p id="compliment" style="font-weight: bold; color: #d53f8c; margin-top: 10px;"></p>
-<p id="quote" style="font-style: italic; font-size: 0.9rem; color: #718096; margin-top: 5px;"></p>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Aggiunto un piccolo stile per i messaggi che appariranno */
+        .message-card {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 4px solid #d53f8c;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+        .message-date {
+            display: block;
+            font-size: 0.7rem;
+            color: #a0aec0;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1 id="greeting">Ciao Piccola ❤️</h1>
+            <p id="compliment" style="font-weight: bold; color: #d53f8c; margin-top: 10px;"></p>
+            <p id="quote" style="font-style: italic; font-size: 0.9rem; color: #718096; margin-top: 5px;"></p>
             <p class="subtitle">Ogni tuo pensiero per me è un tesoro.</p>
         </header>
 
@@ -19,7 +37,7 @@
             <div class="diary-section">
                 <label for="diary">Com'è andata la tua giornata?</label>
                 <textarea id="diary-input" placeholder="Scrivimi tutto quello che vuoi..."></textarea>
-                <button onclick="saveNote()">Custodisci questo ricordo</button>
+                <button id="btn-save">Custodisci questo ricordo</button>
             </div>
             
             <div id="saved-messages">
@@ -30,6 +48,69 @@
             <p>Sempre qui per te. Ti amo. ✨</p>
         </footer>
     </div>
+
     <script src="script.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // La tua configurazione
+        const firebaseConfig = {
+            apiKey: "AIzaSyDnBQSzsiOayGHp8Mu0_1sm0kv_RgT7OAE",
+            authDomain: "bimba-eddbf.firebaseapp.com",
+            databaseURL: "https://bimba-eddbf-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "bimba-eddbf",
+            storageBucket: "bimba-eddbf.firebasestorage.app",
+            messagingSenderId: "820426141964",
+            appId: "1:820426141964:web:c94a69f34ec38f2e551929"
+        };
+
+        // Inizializzazione
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const dbRef = ref(db, 'diario');
+
+        const inputArea = document.getElementById('diary-input');
+        const saveBtn = document.getElementById('btn-save');
+        const displayArea = document.getElementById('saved-messages');
+
+        // Funzione per salvare su Firebase
+        saveBtn.addEventListener('click', () => {
+            const testo = inputArea.value.trim();
+            if (testo !== "") {
+                push(dbRef, {
+                    messaggio: testo,
+                    timestamp: new Date().toLocaleString('it-IT', { 
+                        day: '2-digit', 
+                        month: 'long', 
+                        year: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    })
+                });
+                inputArea.value = ""; // Svuota il box
+                alert("Ricordo custodito! ❤️");
+            }
+        });
+
+        // Funzione per leggere i messaggi in tempo reale
+        onValue(dbRef, (snapshot) => {
+            displayArea.innerHTML = ""; // Pulisce l'area
+            const data = snapshot.val();
+            if (data) {
+                // Trasformiamo in array e invertiamo per avere i più recenti in alto
+                Object.values(data).reverse().forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'message-card';
+                    card.innerHTML = `
+                        <span class="message-date">${item.timestamp}</span>
+                        <p style="margin:0; color:#4a5568;">${item.messaggio}</p>
+                    `;
+                    displayArea.appendChild(card);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
