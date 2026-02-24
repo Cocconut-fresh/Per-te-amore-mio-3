@@ -53,7 +53,7 @@ if (ora >= 5 && ora < 12) {
 } else if (ora >= 12 && ora < 18) {
     greeting.innerText = "Buon pomeriggio, amore mio 🌸";
 } else {
-    greeting.innerText = "Buona serata, vita mia 🌙";
+    greeting.innerText = "Buona serata, piccola mia 🌙";
 }
 
 // 2. Scelta casuale del complimento e della citazione
@@ -82,7 +82,7 @@ function saveNote() {
 function createFallingElements() {
     const container = document.body;
     const elements = ['⚜️', '⭐', '✨', '⚜️']; // Gigli bordeaux e stelle
-    const numberOfElements = infinite; // Quanti ne vuoi sullo schermo
+    const numberOfElements = 10000000000; // Quanti ne vuoi sullo schermo
 
     for (let i = 0; i < numberOfElements; i++) {
         const el = document.createElement('div');
@@ -113,4 +113,5 @@ function createFallingElements() {
 // Avvia la pioggia all'apertura
 
 createFallingElements();
+
 
